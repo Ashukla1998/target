@@ -23,8 +23,8 @@ export default function Navbar() {
           {/* LOGO */}
           <NavLink to="/" className="flex items-center">
             <img
-              src="/NewParth_no.png"
-              alt="Parth Academy"
+              src="/target.png"
+              alt="Target Academy"
               className="h-14 w-auto object-contain"
             />
           </NavLink>

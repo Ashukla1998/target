@@ -98,7 +98,7 @@ export default function Home() {
 
           {/* IMAGE */}
           <motion.img
-            src="/foundation-classroom.png"
+            src="/home_banner.png"
             alt="Foundation Classroom"
             className="rounded-2xl shadow-xl w-full object-cover"
             variants={fadeRight}
