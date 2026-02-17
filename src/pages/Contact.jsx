@@ -1,6 +1,10 @@
 import { Phone, MapPin, Mail, MessageCircle } from "lucide-react";
-
+// import {MapPinIcon} from "@heroicons/react/24/outline";
 export default function Contact() {
+  const mapLocation = {
+    lat: 30.3837,
+    lng: 78.0907,
+  };
   return (
     <main className="bg-slate-50 text-slate-800">
 
@@ -33,34 +37,39 @@ export default function Contact() {
             <ContactItem
               icon={<Phone size={22} />}
               title="Call Us"
-              value="+91 98765 43210"
+              value="+91 8349902861"
               note="Mon–Sat · 9:00 AM – 7:00 PM"
             />
 
             <ContactItem
               icon={<MessageCircle size={22} />}
               title="WhatsApp"
-              value="+91 98765 43210"
+              value="+91 8349902861"
               note="Quick responses for parents"
             />
 
             <ContactItem
               icon={<Mail size={22} />}
               title="Email"
-              value="info@parthacademy.in"
+              value="tomaramitsingh19@gmail.com"
               note="We reply within 24 hours"
             />
 
             <ContactItem
               icon={<MapPin size={22} />}
               title="Visit Us"
-              value="Parth Academy, Main Road, Bhopal, Madhya Pradesh"
+              value="Parth Academy, Near C.L Garden Ater Road Porsa, Madhya Pradesh"
               note="Safe & student-friendly environment"
             />
 
             {/* Google Map Placeholder */}
             <div className="mt-8 w-full h-64 bg-slate-200 rounded-xl flex items-center justify-center text-slate-500 text-sm">
-              Google Map Embed Here
+                <iframe
+                  title="Office Location"
+                  src={`https://www.google.com/maps?q=${mapLocation.lat},${mapLocation.lng}&output=embed`}
+                  className="w-full h-full border-0"
+                  loading="lazy"
+                />
             </div>
           </div>
 
