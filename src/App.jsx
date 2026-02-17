@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Notes from "./pages/Notes"; 
 import News from "./pages/News"; 
+import AssessmentPage from "./pages/Question";
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,8 @@ export default function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/notes" element={<Notes />} />
         <Route path="/news" element={<News />} />
+        <Route path="/assessment" element={<AssessmentPage />} />
+        {/* <Route path="/question" element={Qu} */}
       </Routes>
       <Footer />
     </BrowserRouter>

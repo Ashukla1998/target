@@ -7,11 +7,11 @@ import {
   Trophy,
   ArrowRight,
 } from "lucide-react";
-
+import HeroArcadis from "../components/Home/Hero";
 import {
   CompetitiveExamsMarquee,
 } from "../components/Home/ClassAndExamMarquee";
-
+import StudentCarousel from "../components/Home/StudentCarousel";
 /* ================= ANIMATION VARIANTS ================= */
 
 const fadeUp = {
@@ -42,72 +42,7 @@ export default function Home() {
     <main className="bg-slate-50 text-slate-800">
 
       {/* ================= HERO ================= */}
-      <section className="pt-28 pb-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
-
-          {/* TEXT */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-            className="space-y-6"
-          >
-            <motion.span
-              variants={fadeUp}
-              className="inline-block px-4 py-2 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700"
-            >
-              Classes 1 to 8 · Competitive Foundation
-            </motion.span>
-
-            <motion.h1
-              variants={fadeUp}
-              className="text-4xl md:text-5xl font-bold leading-tight text-slate-900"
-            >
-              Strong Foundations for <br />
-              School & Competitive Success
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-slate-600 text-lg max-w-xl"
-            >
-              Concept-based learning, disciplined study habits, and early
-              competitive readiness — designed specially for students from
-              Class 1 to 8.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <NavLink
-                to="/classes"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-500 text-black font-semibold rounded-lg hover:brightness-105 transition"
-              >
-                Explore Classes <ArrowRight size={18} />
-              </NavLink>
-
-              <NavLink
-                to="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 border border-slate-300 rounded-lg hover:bg-slate-100 transition"
-              >
-                Book Parent Counselling
-              </NavLink>
-            </motion.div>
-          </motion.div>
-
-          {/* IMAGE */}
-          <motion.img
-            src="/home_banner.png"
-            alt="Foundation Classroom"
-            className="rounded-2xl shadow-xl w-full object-cover"
-            variants={fadeRight}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-        </div>
-      </section>
+      <HeroArcadis />
 
       {/* ================= COMPETITIVE EXAMS MARQUEE ================= */}
       <motion.section
@@ -165,6 +100,18 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* ================= TOPPERS ================= */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+            Our Achievers
+          </h2>
+
+          <StudentCarousel />
+        </div>
+      </section>
+
 
       {/* ================= CTA ================= */}
       <motion.section

@@ -4,16 +4,48 @@ import { CheckCircle, Download, ArrowRight, User, BookOpen, MessageSquare, Insta
 
 const questions = [
   {
-    question: "How confident do you feel about your career direction?",
-    options: ["Very confident", "Somewhat confident", "Not sure", "Completely confused"],
+    question: "रक्त समूह कितने प्रकार के होते हैं?",
+    options: ["1", "2", "3", "4"],
   },
   {
-    question: "How often do you overthink decisions?",
-    options: ["Rarely", "Sometimes", "Often", "Almost always"],
+    question: "निम्नलिखित में से किस रक्त समूह को सार्वभौमिक दाता माना जाता है?",
+    options: ["A", "AB", "B", "O"],
   },
   {
-    question: "What best describes your current state?",
-    options: ["Clear and focused", "Exploring options", "Stuck and confused", "Anxious and overwhelmed"],
+    question: "मानव रक्त के स्थानांतरण की प्रक्रिया को क्या कहा जाता है?",
+    options: ["Transfusion", "Processing", "Transporting", "Transferring"],
+  },
+  {
+    question: "सबसे दुर्लभ रक्त समूह कौन सा है?",
+    options: ["AB negative", "AB positive", "O negative", "O positive"],
+  },
+  {
+    question: "रक्त समूह की खोज किसने की?",
+    options: ["Thomas Cooley", "Karl Landsteiner", "Camillo Golgi", "Ernst Haecker"],
+  },
+  {
+    question: "मानव रक्त का pH मान है",
+    options: ["6.2", "6.9", "7.4", "8.2"],
+  },
+  {
+    question: "निम्नलिखित में से किस ब्लड ग्रुप को 'बॉम्बे ब्लड ग्रुप' के नाम से जाना जाता है?",
+    options: ["AB negative", "HH Group", "A Group", "AB Group"],
+  },
+  {
+    question: "एक वयस्क के लिए औसत रक्त की मात्रा लगभग होती है",
+    options: ["25 ltr", "2 ltr", "15 ltr", "5 ltr"],
+  },
+  {
+    question: "निम्नलिखित में से किसे एरिथ्रोसाइट्स भी कहा जाता है?",
+    options: ["Red Blood cells", "White Blood Cells", "Platelets", "All of above"],
+  },
+  {
+    question: "रक्त समूह कितने होते हैं?",
+    options: ["2", "5", "3", "4"],
+  },
+  {
+    question: "निम्नलिखित में से कौन संक्रमण से लड़ता है और हमें बीमारियों से बचाता है?",
+    options: ["Red Blood cells", "White Blood Cells", "Platelets", "Plasma"],
   },
 ];
 

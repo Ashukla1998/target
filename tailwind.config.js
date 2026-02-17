@@ -9,6 +9,7 @@ export default {
       /* ---------------- COLORS ---------------- */
       colors: {
         background: "#0B0B0B",
+        arcadisOrange: "#E85C0D",
         card: "#151515",
         accent: "#F4B400",
         muted: "#B5B5B5",
