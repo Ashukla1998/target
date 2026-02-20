@@ -34,7 +34,7 @@ export default function Navbar() {
             <NavItem to="/" label="Home" icon={<Home size={16} />} />
             <NavItem to="/notes" label="Notes" icon={<BookOpen size={16} />} />
             <NavItem to="/about" label="About" icon={<Info size={16} />} />
-            <NavItem to="/blog" label="Blog" icon={<FileText size={16} />} />
+            <NavItem to="/assessment" label="Assessment" icon={<FileText size={16} />} />
             <NavItem to="/contact" label="Contact" icon={<Phone size={16} />} />
           </div>
 
@@ -71,7 +71,7 @@ export default function Navbar() {
               <MobileItem to="/" label="Home" icon={<Home size={18} />} setOpen={setOpen} />
               <MobileItem to="/notes" label="Notes" icon={<BookOpen size={18} />} setOpen={setOpen} />
               <MobileItem to="/about" label="About" icon={<Info size={18} />} setOpen={setOpen} />
-              <MobileItem to="/blog" label="Blog" icon={<FileText size={18} />} setOpen={setOpen} />
+              <MobileItem to="/assessment" label="Assessment" icon={<FileText size={18} />} setOpen={setOpen} />
               <MobileItem to="/contact" label="Contact" icon={<Phone size={18} />} setOpen={setOpen} />
 
               <NavLink

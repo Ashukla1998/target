@@ -1,136 +1,230 @@
-import React from "react";
-import { Download, BookOpen, FileText } from "lucide-react";
+import { useState } from "react";
+import {
+  Download,
+  BookOpen,
+  FileText,
+  ChevronRight,
+} from "lucide-react";
 
 export default function Notes() {
+  const [activeTab, setActiveTab] = useState("school");
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+
+  const schoolData = {
+    "Class 5": {
+      Mathematics: ["Fractions", "Decimals", "Geometry"],
+      Science: ["Plants", "Human Body", "Energy"],
+    },
+    "Class 6": {
+      Mathematics: ["Algebra", "Integers"],
+      English: ["Grammar", "Writing Skills"],
+    },
+  };
+
+  const competitiveData = {
+    Olympiad: ["Paper 2024", "Practice Set", "Solutions"],
+    NTSE: ["Stage 1 Paper", "Mental Ability", "Previous Year Paper"],
+  };
+
   return (
-    <main className="bg-slate-50 text-slate-800 min-h-screen">
+    <main className="bg-gradient-to-br from-slate-50 via-white to-blue-50 min-h-screen pb-24">
 
-      {/* ================= HEADER ================= */}
-      <section className="pt-28 pb-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-yellow-600 mb-4">
-            NOtes
-          </p>
-          <h1 className="text-4xl font-bold text-slate-900">
-            Study Notes & Resources
+      {/* HERO */}
+      <section className="pt-28 pb-20 text-center px-6">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl font-bold text-slate-900 leading-tight">
+            Learning Resources <br />
+            <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+              Made Simple
+            </span>
           </h1>
-          <p className="mt-4 text-slate-600">
-            Well-structured notes and practice material to support classroom
-            learning and exam preparation.
+          <p className="mt-6 text-lg text-slate-600">
+            Structured class-wise notes and competitive exam materials.
           </p>
         </div>
       </section>
 
-      {/* ================= NOTES SECTIONS ================= */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
-
-          {/* -------- SCHOOL NOTES -------- */}
-          <div>
-            <SectionTitle
-              icon={<BookOpen size={22} />}
-              title="Class-wise Notes"
-              subtitle="For Classes 1 to 8"
-            />
-
-            <div className="grid sm:grid-cols-2 gap-6 mt-8">
-              <NoteCard
-                title="Class 1 – 2"
-                desc="Basic concepts, worksheets, and practice material."
-              />
-              <NoteCard
-                title="Class 3 – 4"
-                desc="Concept notes, examples, and revision sheets."
-              />
-              <NoteCard
-                title="Class 5 – 6"
-                desc="Detailed explanations and practice questions."
-              />
-              <NoteCard
-                title="Class 7 – 8"
-                desc="Advanced concepts and exam-oriented notes."
-              />
-            </div>
-          </div>
-
-          {/* -------- COMPETITIVE NOTES -------- */}
-          <div>
-            <SectionTitle
-              icon={<FileText size={22} />}
-              title="Competitive Exam Notes"
-              subtitle="Foundation & Competitive Preparation"
-            />
-
-            <div className="space-y-5 mt-8">
-              <DownloadCard title="Olympiad Preparation Notes" />
-              <DownloadCard title="NTSE Foundation Material" />
-              <DownloadCard title="Mental Maths & Reasoning" />
-              <DownloadCard title="Scholarship Exam Practice Sets" />
-            </div>
-          </div>
-
+      {/* TABS */}
+      <div className="flex justify-center mb-16">
+        <div className="bg-white/70 backdrop-blur-md shadow-xl rounded-2xl p-2 flex gap-2 border">
+          <TabButton
+            active={activeTab === "school"}
+            onClick={() => setActiveTab("school")}
+            icon={<BookOpen size={18} />}
+            label="School Notes"
+          />
+          <TabButton
+            active={activeTab === "competitive"}
+            onClick={() => setActiveTab("competitive")}
+            icon={<FileText size={18} />}
+            label="Competitive Exams"
+          />
         </div>
-      </section>
+      </div>
 
-      {/* ================= INFO ================= */}
-      <section className="py-16 bg-blue-50">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-slate-600">
-            📌 Notes are regularly updated and aligned with the latest
-            curriculum. Parents and students can download materials as per
-            guidance from teachers.
-          </p>
+      {/* SCHOOL SECTION */}
+      {activeTab === "school" && (
+        <div className="max-w-6xl mx-auto px-6 space-y-10">
+
+          {/* Breadcrumb */}
+          {(selectedClass || selectedSubject) && (
+            <div className="text-sm text-slate-500 flex items-center gap-2">
+              <span>School</span>
+              {selectedClass && (
+                <>
+                  <ChevronRight size={14} />
+                  <span>{selectedClass}</span>
+                </>
+              )}
+              {selectedSubject && (
+                <>
+                  <ChevronRight size={14} />
+                  <span>{selectedSubject}</span>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Class Selection */}
+          {!selectedClass && (
+            <div className="grid md:grid-cols-3 gap-8">
+              {Object.keys(schoolData).map((cls, index) => (
+                <SelectionCard
+                  key={index}
+                  title={cls}
+                  count={Object.keys(schoolData[cls]).length}
+                  onClick={() => setSelectedClass(cls)}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Subject Selection */}
+          {selectedClass && !selectedSubject && (
+            <>
+              <BackButton onClick={() => setSelectedClass("")} />
+              <div className="grid md:grid-cols-3 gap-8">
+                {Object.keys(schoolData[selectedClass]).map(
+                  (subject, index) => (
+                    <SelectionCard
+                      key={index}
+                      title={subject}
+                      count={
+                        schoolData[selectedClass][subject].length
+                      }
+                      onClick={() => setSelectedSubject(subject)}
+                    />
+                  )
+                )}
+              </div>
+            </>
+          )}
+
+          {/* Chapters */}
+          {selectedSubject && (
+            <>
+              <BackButton onClick={() => setSelectedSubject("")} />
+              <div className="grid md:grid-cols-2 gap-8">
+                {schoolData[selectedClass][selectedSubject].map(
+                  (chapter, index) => (
+                    <ResourceCard key={index} title={chapter} />
+                  )
+                )}
+              </div>
+            </>
+          )}
         </div>
-      </section>
+      )}
 
+      {/* COMPETITIVE SECTION */}
+      {activeTab === "competitive" && (
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+          {Object.keys(competitiveData).map((exam, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition border"
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                <FileText size={18} className="text-yellow-600" />
+                {exam}
+              </h3>
+
+              <div className="space-y-4">
+                {competitiveData[exam].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex justify-between items-center p-4 bg-slate-50 rounded-xl hover:bg-yellow-50 transition group"
+                  >
+                    <span>{item}</span>
+                    <Download
+                      size={18}
+                      className="text-yellow-600 group-hover:scale-110 transition"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 }
-
-/* ================= COMPONENTS ================= */
-
-function SectionTitle({ icon, title, subtitle }) {
+function TabButton({ active, onClick, icon, label }) {
   return (
-    <div>
-      <div className="flex items-center gap-3 text-yellow-600 mb-2">
-        {icon}
-        <span className="text-sm font-semibold uppercase tracking-wide">
-          {subtitle}
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition ${
+        active
+          ? "bg-yellow-600 text-white shadow-md"
+          : "text-slate-600 hover:bg-white"
+      }`}
+    >
+      {icon}
+      {label}
+    </button>
+  );
+}
+
+function SelectionCard({ title, onClick, count }) {
+  return (
+    <div
+      onClick={onClick}
+      className="cursor-pointer bg-white rounded-2xl p-10 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition relative border"
+    >
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+
+      {count && (
+        <span className="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+          {count} Items
         </span>
+      )}
+    </div>
+  );
+}
+
+function ResourceCard({ title }) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-1 transition border">
+      <div className="flex justify-between items-center">
+        <h4 className="font-medium">{title}</h4>
+        <button className="flex items-center gap-2 text-yellow-600 font-medium text-sm hover:underline">
+          <Download size={16} />
+          View
+        </button>
       </div>
-      <h2 className="text-2xl font-bold text-slate-900">
-        {title}
-      </h2>
     </div>
   );
 }
 
-function NoteCard({ title, desc }) {
+function BackButton({ onClick }) {
   return (
-    <div className="bg-white border rounded-xl p-6 hover:shadow-md transition">
-      <h3 className="font-semibold text-slate-900 mb-2">
-        {title}
-      </h3>
-      <p className="text-sm text-slate-600 mb-4">
-        {desc}
-      </p>
-      <button className="text-sm font-medium text-yellow-600 hover:underline">
-        View Notes →
-      </button>
-    </div>
-  );
-}
-
-function DownloadCard({ title }) {
-  return (
-    <div className="flex items-center justify-between bg-white border rounded-xl p-5 hover:shadow-md transition">
-      <span className="font-medium text-slate-800">
-        {title}
-      </span>
-      <button className="flex items-center gap-2 text-sm font-semibold text-yellow-600 hover:underline">
-        <Download size={16} />
-        Download
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className="text-sm font-medium text-yellow-600 hover:underline"
+    >
+      ← Back
+    </button>
   );
 }

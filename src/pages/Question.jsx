@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { jsPDF } from "jspdf";
-import { CheckCircle, Download, ArrowRight, User, BookOpen, MessageSquare, Instagram, Facebook } from "lucide-react";
+import {
+  CheckCircle,
+  Download,
+  ArrowRight,
+  BookOpen,
+} from "lucide-react";
 
 const questions = [
   {
@@ -8,44 +13,14 @@ const questions = [
     options: ["1", "2", "3", "4"],
   },
   {
-    question: "निम्नलिखित में से किस रक्त समूह को सार्वभौमिक दाता माना जाता है?",
+    question:
+      "निम्नलिखित में से किस रक्त समूह को सार्वभौमिक दाता माना जाता है?",
     options: ["A", "AB", "B", "O"],
   },
   {
-    question: "मानव रक्त के स्थानांतरण की प्रक्रिया को क्या कहा जाता है?",
+    question:
+      "मानव रक्त के स्थानांतरण की प्रक्रिया को क्या कहा जाता है?",
     options: ["Transfusion", "Processing", "Transporting", "Transferring"],
-  },
-  {
-    question: "सबसे दुर्लभ रक्त समूह कौन सा है?",
-    options: ["AB negative", "AB positive", "O negative", "O positive"],
-  },
-  {
-    question: "रक्त समूह की खोज किसने की?",
-    options: ["Thomas Cooley", "Karl Landsteiner", "Camillo Golgi", "Ernst Haecker"],
-  },
-  {
-    question: "मानव रक्त का pH मान है",
-    options: ["6.2", "6.9", "7.4", "8.2"],
-  },
-  {
-    question: "निम्नलिखित में से किस ब्लड ग्रुप को 'बॉम्बे ब्लड ग्रुप' के नाम से जाना जाता है?",
-    options: ["AB negative", "HH Group", "A Group", "AB Group"],
-  },
-  {
-    question: "एक वयस्क के लिए औसत रक्त की मात्रा लगभग होती है",
-    options: ["25 ltr", "2 ltr", "15 ltr", "5 ltr"],
-  },
-  {
-    question: "निम्नलिखित में से किसे एरिथ्रोसाइट्स भी कहा जाता है?",
-    options: ["Red Blood cells", "White Blood Cells", "Platelets", "All of above"],
-  },
-  {
-    question: "रक्त समूह कितने होते हैं?",
-    options: ["2", "5", "3", "4"],
-  },
-  {
-    question: "निम्नलिखित में से कौन संक्रमण से लड़ता है और हमें बीमारियों से बचाता है?",
-    options: ["Red Blood cells", "White Blood Cells", "Platelets", "Plasma"],
   },
 ];
 
@@ -53,144 +28,150 @@ export default function AssessmentPage() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [completed, setCompleted] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   function handleAnswer(option) {
-    setIsAnimating(true);
-    setTimeout(() => {
-      const updated = [...answers];
-      updated[current] = option;
-      setAnswers(updated);
+    const updated = [...answers];
+    updated[current] = option;
+    setAnswers(updated);
 
-      if (current < questions.length - 1) {
-        setCurrent(current + 1);
-      } else {
-        setCompleted(true);
-      }
-      setIsAnimating(false);
-    }, 200);
+    if (current < questions.length - 1) {
+      setCurrent(current + 1);
+    } else {
+      setCompleted(true);
+    }
   }
 
   function downloadPDF() {
     const doc = new jsPDF();
-    doc.setFontSize(22);
-    doc.setTextColor(40, 40, 40);
-    doc.text("Career Clarity Report", 20, 30);
-    doc.setLineWidth(0.5);
-    doc.line(20, 35, 190, 35);
+    doc.setFontSize(20);
+    doc.text("Assessment Report", 20, 20);
 
-    doc.setFontSize(12);
     questions.forEach((q, i) => {
-      doc.setFont("helvetica", "bold");
-      doc.text(`${i + 1}. ${q.question}`, 20, 50 + i * 25);
-      doc.setFont("helvetica", "normal");
-      doc.text(`Response: ${answers[i]}`, 25, 60 + i * 25);
+      doc.text(`${i + 1}. ${q.question}`, 20, 40 + i * 20);
+      doc.text(`Answer: ${answers[i]}`, 25, 50 + i * 20);
     });
 
-    doc.save("career-assessment.pdf");
+    doc.save("assessment-report.pdf");
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900">
-      <main className="flex-grow flex flex-col items-center px-4 py-12">
-        {/* HERO SECTION */}
-        <div className="max-w-2xl text-center mb-10">
-          <div className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-[#B8860B] uppercase bg-yellow-50 rounded-full">
-            Self-Discovery Journey
+    <main className="bg-gradient-to-br from-slate-50 via-white to-blue-50 min-h-screen pb-24">
+
+      {/* HERO */}
+      <section className="pt-28 pb-20 text-center px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-yellow-700 uppercase bg-yellow-100 rounded-full">
+            Self Assessment
           </div>
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            Career & Clarity Assessment
+
+          <h1 className="text-5xl font-bold text-slate-900 leading-tight">
+            Knowledge Check <br />
+            <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+              Test Your Understanding
+            </span>
           </h1>
-          <p className="text-slate-600 text-lg">
-            Understand your current mindset and unlock the path to your next big breakthrough.
+
+          <p className="mt-6 text-lg text-slate-600">
+            Answer a few questions and download your performance summary.
           </p>
         </div>
+      </section>
 
-        {/* ASSESSMENT CARD */}
-        <div className={`w-full max-w-2xl bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden transition-all duration-300 ${isAnimating ? 'opacity-50 scale-[0.98]' : 'opacity-100 scale-100'}`}>
-          
-          {/* Progress Bar */}
-          {!completed && (
-            <div className="h-1.5 w-full bg-slate-100">
-              <div 
-                className="h-full bg-[#B8860B] transition-all duration-500 ease-out"
-                style={{ width: `${((current + 1) / questions.length) * 100}%` }}
-              />
-            </div>
-          )}
+      {/* CARD */}
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border p-10 transition">
 
-          <div className="p-8 sm:p-12">
-            {!completed ? (
-              <>
-                <div className="flex justify-between items-end mb-8">
-                  <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">
-                    Question {current + 1} of {questions.length}
-                  </span>
-                </div>
+          {!completed ? (
+            <>
+              {/* Progress */}
+              <div className="h-2 w-full bg-slate-100 rounded-full mb-10 overflow-hidden">
+                <div
+                  className="h-full bg-yellow-500 transition-all duration-500"
+                  style={{
+                    width: `${((current + 1) / questions.length) * 100}%`,
+                  }}
+                />
+              </div>
 
-                <h2 className="text-2xl sm:text-3xl font-bold mb-10 text-slate-800 leading-tight">
+              {/* Question */}
+              <div className="mb-8">
+                <span className="text-sm text-slate-400 font-semibold">
+                  Question {current + 1} of {questions.length}
+                </span>
+
+                <h2 className="text-2xl font-bold mt-4 text-slate-800 leading-snug">
                   {questions[current].question}
                 </h2>
+              </div>
 
-                <div className="grid gap-4">
-                  {questions[current].options.map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => handleAnswer(option)}
-                      className="group flex items-center justify-between w-full text-left border-2 border-slate-100 rounded-xl px-6 py-4 hover:border-[#B8860B] hover:bg-yellow-50/30 transition-all duration-200"
-                    >
-                      <span className="text-lg font-medium text-slate-700 group-hover:text-[#B8860B]">{option}</span>
-                      <ArrowRight className="w-5 h-5 text-slate-300 group-hover:text-[#B8860B] group-hover:translate-x-1 transition-all" />
-                    </button>
-                  ))}
-                </div>
+              {/* Options */}
+              <div className="grid gap-4">
+                {questions[current].options.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleAnswer(option)}
+                    className="group flex justify-between items-center border-2 border-slate-100 rounded-2xl px-6 py-4 hover:border-yellow-500 hover:bg-yellow-50 transition-all"
+                  >
+                    <span className="font-medium text-slate-700 group-hover:text-yellow-700">
+                      {option}
+                    </span>
+                    <ArrowRight className="w-5 h-5 text-slate-300 group-hover:text-yellow-600 group-hover:translate-x-1 transition-all" />
+                  </button>
+                ))}
+              </div>
 
-                <div className="mt-10 pt-6 border-t border-slate-50 flex items-center gap-3 text-slate-400">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <p className="text-sm italic">Your responses are 100% private and secure.</p>
-                </div>
-              </>
-            ) : (
-              <div className="text-center animate-in fade-in zoom-in duration-500">
+              <div className="mt-10 flex items-center gap-2 text-sm text-slate-400">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                Your responses are private and secure.
+              </div>
+            </>
+          ) : (
+            <>
+              {/* COMPLETED */}
+              <div className="text-center">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
-                <h2 className="text-3xl font-bold mb-3 text-slate-900">Analysis Complete!</h2>
-                <p className="text-slate-600 mb-10">
-                  We've gathered insights based on your current state. Download your summary below.
+
+                <h2 className="text-3xl font-bold mb-4">
+                  Assessment Complete!
+                </h2>
+
+                <p className="text-slate-600 mb-8">
+                  Review your answers below and download your report.
                 </p>
-
-                <div className="space-y-3 mb-10">
-                  {questions.map((q, i) => (
-                    <div key={i} className="flex items-center gap-4 bg-slate-50 p-4 rounded-lg text-left border border-slate-100">
-                      <div className="bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm text-xs font-bold text-[#B8860B]">
-                        {i+1}
-                      </div>
-                      <div>
-                        <p className="text-xs text-slate-400 font-bold uppercase tracking-tighter">{q.question}</p>
-                        <p className="text-slate-700 font-semibold">{answers[i]}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button
-                    onClick={downloadPDF}
-                    className="flex-1 flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition shadow-lg shadow-slate-200"
-                  >
-                    <Download className="w-5 h-5" />
-                    Download PDF Report
-                  </button>
-                  <button className="flex-1 bg-[#B8860B] text-white py-4 rounded-xl font-bold hover:bg-[#966d09] transition shadow-lg shadow-yellow-200/50">
-                    Book Free Strategy Call
-                  </button>
-                </div>
               </div>
-            )}
-          </div>
+
+              <div className="space-y-4 mb-10">
+                {questions.map((q, i) => (
+                  <div
+                    key={i}
+                    className="bg-slate-50 rounded-xl p-4 border flex justify-between items-center"
+                  >
+                    <div>
+                      <p className="text-xs text-slate-400 mb-1">
+                        {q.question}
+                      </p>
+                      <p className="font-semibold text-slate-800">
+                        {answers[i]}
+                      </p>
+                    </div>
+                    <BookOpen size={18} className="text-yellow-600" />
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={downloadPDF}
+                className="w-full flex items-center justify-center gap-2 bg-yellow-600 text-white py-4 rounded-2xl font-semibold hover:bg-yellow-700 transition shadow-lg"
+              >
+                <Download size={18} />
+                Download PDF Report
+              </button>
+            </>
+          )}
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
